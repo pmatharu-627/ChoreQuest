@@ -1,284 +1,300 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#6c63ff">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ChoreQuest</title>
+
 <style>
-:root{
-  --bg:#f6f7fb; --card:#fff; --text:#202333; --muted:#7c8193;
-  --accent:#6c63ff; --accent2:#8f87ff; --success:#23b26d; --danger:#e55353;
-  --shadow:0 10px 30px rgba(24,29,58,.08); --radius:22px;
+* {
+  box-sizing: border-box;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text)}
-button,input{font:inherit}
-button{cursor:pointer}
-.app{max-width:720px;margin:0 auto;padding:24px 18px 60px}
-.topbar,.section-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.topbar{margin-bottom:18px}
-h1{font-size:34px;margin:2px 0 0}
-h2{font-size:20px;margin:0}
-.eyebrow{font-size:13px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-.eyebrow.light{color:rgba(255,255,255,.75)}
-.avatar{width:54px;height:54px;border:none;border-radius:18px;background:#fff;box-shadow:var(--shadow);font-size:28px}
-.balance-card{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border-radius:28px;padding:24px;display:flex;justify-content:space-between;align-items:end;box-shadow:var(--shadow)}
-.balance{display:flex;gap:10px;align-items:center;font-size:36px;margin-top:4px}
-.streak{font-weight:700;background:rgba(255,255,255,.16);padding:10px 12px;border-radius:14px;font-size:14px}
-.reward-progress,section{margin-top:24px}
-.reward-progress{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow)}
-.goal-cost{font-weight:800;color:var(--accent)}
-.progress{height:12px;background:#ececf8;border-radius:999px;margin-top:14px;overflow:hidden}
-.progress>div{height:100%;width:0;background:var(--accent);border-radius:999px;transition:width .3s ease}
-.cards{display:grid;gap:12px;margin-top:12px}
-.chore{background:var(--card);border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow)}
-.chore-left{display:flex;gap:12px;align-items:center}
-.chore-icon{width:42px;height:42px;border-radius:14px;background:#f0efff;display:grid;place-items:center;font-size:21px}
-.chore-title{font-weight:800}
-.chore-points{color:var(--muted);font-size:14px;margin-top:2px}
-.done-btn{border:none;border-radius:14px;background:#eaf8f1;color:var(--success);font-weight:800;padding:10px 13px}
-.done-btn:disabled{opacity:.55;cursor:default}
-.text-btn,.icon-btn{border:none;background:transparent;color:var(--accent);font-weight:800}
-.reward-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
-.reward{background:var(--card);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
-.reward .emoji{font-size:30px}
-.reward h3{margin:8px 0 4px;font-size:17px}
-.reward p{margin:0 0 12px;color:var(--muted);font-size:13px}
-.redeem{width:100%;border:none;border-radius:12px;background:var(--accent);color:#fff;padding:10px;font-weight:800}
-.redeem:disabled{background:#d7d5ef}
-.activity{display:grid;gap:10px;margin-top:12px}
-.activity-item{background:#fff;padding:14px 16px;border-radius:16px;display:flex;justify-content:space-between;box-shadow:var(--shadow);font-size:14px}
-.activity-item span:last-child{color:var(--muted)}
-dialog{border:none;border-radius:22px;padding:0;width:min(92vw,460px);box-shadow:0 30px 80px rgba(0,0,0,.2)}
-dialog::backdrop{background:rgba(25,26,38,.45)}
-.dialog-card{padding:22px;display:grid;gap:16px}
-label{display:grid;gap:7px;font-size:14px;font-weight:700}
-input{border:1px solid #dedfea;border-radius:13px;padding:12px 13px;outline:none}
-input:focus{border-color:var(--accent)}
-.primary,.danger{border:none;border-radius:13px;padding:12px;font-weight:800}
-.primary{background:var(--accent);color:#fff}
-.danger{background:#fff0f0;color:var(--danger)}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);background:#222638;color:white;padding:12px 16px;border-radius:14px;opacity:0;pointer-events:none;transition:.25s;z-index:50}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.note{background:#fffbe8;border:1px solid #f1e3a6;padding:12px 14px;border-radius:14px;font-size:13px;margin-top:18px;color:#625c3c}
-@media (max-width:420px){.reward-grid{grid-template-columns:1fr}.balance-card{align-items:start;flex-direction:column;gap:16px}}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f5ff;
+  color: #25233a;
+}
+
+.app {
+  max-width: 600px;
+  margin: auto;
+  padding-bottom: 80px;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg,#7559f5,#9b7cff);
+  color: white;
+  padding: 25px 20px 45px;
+  border-radius: 0 0 30px 30px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.avatar {
+  background: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+}
+
+.hello {
+  margin-top: 25px;
+}
+
+.hello small {
+  opacity: .9;
+  font-size: 16px;
+}
+
+.hello h1 {
+  margin: 5px 0;
+  font-size: 34px;
+}
+
+.hello p {
+  margin: 5px 0;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  gap: 10px;
+  padding: 0 15px;
+  margin-top: -25px;
+}
+
+.stat {
+  background: white;
+  flex: 1;
+  text-align: center;
+  padding: 16px 8px;
+  border-radius: 18px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
+
+.stat-icon {
+  font-size: 25px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+.stat span {
+  font-size: 12px;
+  color: #777;
+}
+
+/* CONTENT */
+.content {
+  padding: 20px 16px;
+}
+
+.reward {
+  background: linear-gradient(135deg,#fff2bd,#ffe17a);
+  border-radius: 22px;
+  padding: 18px;
+  margin-bottom: 25px;
+}
+
+.reward-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reward h3 {
+  margin: 5px 0;
+  font-size: 23px;
+}
+
+.progress {
+  height: 12px;
+  background: rgba(255,255,255,.7);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-bar {
+  width: 82.5%;
+  height: 100%;
+  background: #7559f5;
+  border-radius: 20px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-title h2 {
+  margin: 5px 0 15px;
+}
+
+.add {
+  border: 0;
+  background: #eee9ff;
+  color: #654be4;
+  border-radius: 12px;
+  padding: 9px 13px;
+  font-weight: bold;
+}
+
+/* CHORES */
+.chore {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.05);
+}
+
+.chore-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  background: #eee9ff;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+}
+
+.chore-info {
+  flex: 1;
+}
+
+.chore-info strong {
+  display: block;
+  font-size: 17px;
+}
+
+.chore-info span {
+  color: #777;
+  font-size: 13px;
+}
+
+.coins {
+  color: #e5a400;
+  font-weight: bold;
+}
+
+.done {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #7b61ff;
+  background: white;
+  font-size: 18px;
+}
+
+.done.completed {
+  background: #7b61ff;
+  color: white;
+}
+
+/* REWARDS */
+.reward-card {
+  background: white;
+  padding: 15px;
+  border-radius: 18px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reward-emoji {
+  font-size: 30px;
+}
+
+.reward-info {
+  flex: 1;
+}
+
+.reward-info strong {
+  display: block;
+}
+
+.claim {
+  border: 0;
+  background: #7559f5;
+  color: white;
+  padding: 9px 12px;
+  border-radius: 12px;
+}
+
+/* CELEBRATION */
+#message {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #25233a;
+  color: white;
+  padding: 13px 20px;
+  border-radius: 20px;
+  z-index: 20;
+  box-shadow: 0 5px 20px rgba(0,0,0,.2);
+}
+
+/* NAVIGATION */
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 5px;
+  border-top: 1px solid #eee;
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+}
+
+.nav-item div {
+  font-size: 23px;
+}
+
+.nav-item.active {
+  color: #7559f5;
+}
 </style>
 </head>
+
 <body>
+
+<div id="message">🎉 Great job!</div>
+
 <div class="app">
-  <header class="topbar">
-    <div>
-      <div class="eyebrow">Welcome back</div>
-      <h1 id="childName">Ava</h1>
-    </div>
-    <button class="avatar" id="parentBtn" aria-label="Parent controls">👧</button>
-  </header>
 
-  <section class="balance-card">
-    <div>
-      <div class="eyebrow light">Your balance</div>
-      <div class="balance"><span>🪙</span><strong id="coinBalance">125</strong></div>
-    </div>
-    <div class="streak">🔥 <span id="streakCount">4</span> day streak</div>
-  </section>
-
-  <section class="reward-progress">
-    <div class="section-row">
-      <div>
-        <div class="eyebrow">Next reward</div>
-        <h2 id="goalName">Movie Night</h2>
-      </div>
-      <div class="goal-cost"><span id="goalCurrent">125</span>/<span id="goalTarget">200</span></div>
-    </div>
-    <div class="progress"><div id="progressBar"></div></div>
-  </section>
-
-  <section>
-    <div class="section-row">
-      <h2>Today's chores</h2>
-      <button class="text-btn" id="addChoreBtn">+ Add</button>
-    </div>
-    <div id="choresList" class="cards"></div>
-  </section>
-
-  <section>
-    <div class="section-row"><h2>Reward shop</h2></div>
-    <div id="rewardsList" class="reward-grid"></div>
-  </section>
-
-  <section>
-    <div class="section-row"><h2>Recent activity</h2></div>
-    <div id="activityList" class="activity"></div>
-  </section>
-
-  <div class="note">This single-file version saves your data on this device/browser using local storage.</div>
-</div>
-
-<dialog id="parentDialog">
-  <form method="dialog" class="dialog-card">
-    <div class="section-row">
-      <h2>Parent controls</h2>
-      <button class="icon-btn" value="cancel">✕</button>
-    </div>
-    <label>Child name<input id="nameInput"></label>
-    <label>Parent PIN<input id="pinInput" inputmode="numeric" maxlength="4"></label>
-    <button id="saveParentBtn" class="primary" value="default">Save</button>
-    <button id="resetBtn" class="danger" type="button">Reset app data</button>
-  </form>
-</dialog>
-
-<dialog id="addChoreDialog">
-  <form method="dialog" class="dialog-card">
-    <div class="section-row">
-      <h2>Add chore</h2>
-      <button class="icon-btn" value="cancel">✕</button>
-    </div>
-    <label>Chore name<input id="choreTitleInput" placeholder="e.g. Read 20 minutes"></label>
-    <label>Coins<input id="chorePointsInput" type="number" min="1" max="100" value="10"></label>
-    <button id="saveChoreBtn" class="primary" value="default">Add chore</button>
-  </form>
-</dialog>
-
-<div id="toast" class="toast"></div>
-
-<script>
-const defaultState = {
-  childName: "Ava",
-  pin: "1234",
-  coins: 125,
-  streak: 4,
-  chores: [
-    {id:1,title:"Make your bed",points:5,icon:"🛏️",done:false},
-    {id:2,title:"Homework",points:15,icon:"📚",done:false},
-    {id:3,title:"Clean your room",points:20,icon:"🧹",done:false},
-    {id:4,title:"Read for 20 minutes",points:10,icon:"📖",done:false}
-  ],
-  rewards: [
-    {id:1,title:"Movie Night",cost:200,emoji:"🎬"},
-    {id:2,title:"Ice Cream",cost:100,emoji:"🍦"},
-    {id:3,title:"30 Min Screen Time",cost:75,emoji:"🎮"},
-    {id:4,title:"Choose Dinner",cost:150,emoji:"🍕"}
-  ],
-  activity: ["Welcome to ChoreQuest!"]
-};
-
-let state = JSON.parse(localStorage.getItem("chorequest-single-state") || "null") || defaultState;
-const $ = s => document.querySelector(s);
-
-function save(){
-  localStorage.setItem("chorequest-single-state", JSON.stringify(state));
-  render();
-}
-function toast(msg){
-  const t=$("#toast");
-  t.textContent=msg;
-  t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),1700);
-}
-function esc(s){
-  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
-}
-function render(){
-  $("#childName").textContent=state.childName;
-  $("#coinBalance").textContent=state.coins;
-  $("#streakCount").textContent=state.streak;
-
-  const goal=state.rewards[0];
-  $("#goalName").textContent=goal.title;
-  $("#goalCurrent").textContent=Math.min(state.coins,goal.cost);
-  $("#goalTarget").textContent=goal.cost;
-  $("#progressBar").style.width=Math.min(100,state.coins/goal.cost*100)+"%";
-
-  $("#choresList").innerHTML=state.chores.map(c=>`
-    <div class="chore">
-      <div class="chore-left">
-        <div class="chore-icon">${c.icon || "✅"}</div>
-        <div>
-          <div class="chore-title">${esc(c.title)}</div>
-          <div class="chore-points">+${c.points} coins</div>
-        </div>
-      </div>
-      <button class="done-btn" data-chore="${c.id}" ${c.done?"disabled":""}>${c.done?"Done ✓":"Done"}</button>
-    </div>`).join("");
-
-  $("#rewardsList").innerHTML=state.rewards.map(r=>`
-    <div class="reward">
-      <div class="emoji">${r.emoji}</div>
-      <h3>${esc(r.title)}</h3>
-      <p>🪙 ${r.cost} coins</p>
-      <button class="redeem" data-reward="${r.id}" ${state.coins<r.cost?"disabled":""}>Redeem</button>
-    </div>`).join("");
-
-  $("#activityList").innerHTML=(state.activity||[]).slice(0,6).map(a=>`
-    <div class="activity-item"><span>${esc(a)}</span><span>now</span></div>`).join("");
-}
-
-document.addEventListener("click",e=>{
-  const choreBtn=e.target.closest("[data-chore]");
-  if(choreBtn){
-    const id=Number(choreBtn.dataset.chore);
-    const c=state.chores.find(x=>x.id===id);
-    if(c && !c.done){
-      c.done=true;
-      state.coins+=c.points;
-      state.activity.unshift(`Completed "${c.title}" (+${c.points})`);
-      save();
-      toast(`Great job! +${c.points} coins 🎉`);
-    }
-  }
-
-  const rewardBtn=e.target.closest("[data-reward]");
-  if(rewardBtn){
-    const id=Number(rewardBtn.dataset.reward);
-    const r=state.rewards.find(x=>x.id===id);
-    if(r && state.coins>=r.cost){
-      state.coins-=r.cost;
-      state.activity.unshift(`Redeemed "${r.title}" (-${r.cost})`);
-      save();
-      toast(`${r.title} redeemed! 🎁`);
-    }
-  }
-});
-
-$("#parentBtn").onclick=()=>{
-  $("#nameInput").value=state.childName;
-  $("#pinInput").value=state.pin;
-  $("#parentDialog").showModal();
-};
-$("#saveParentBtn").onclick=(e)=>{
-  e.preventDefault();
-  const name=$("#nameInput").value.trim();
-  const pin=$("#pinInput").value.trim();
-  if(name) state.childName=name;
-  if(/^\d{4}$/.test(pin)) state.pin=pin;
-  save();
-  $("#parentDialog").close();
-  toast("Parent settings saved");
-};
-$("#resetBtn").onclick=()=>{
-  if(confirm("Reset all ChoreQuest data?")){
-    state=JSON.parse(JSON.stringify(defaultState));
-    save();
-    $("#parentDialog").close();
-    toast("App reset");
-  }
-};
-$("#addChoreBtn").onclick=()=>$("#addChoreDialog").showModal();
-$("#saveChoreBtn").onclick=(e)=>{
-  e.preventDefault();
-  const title=$("#choreTitleInput").value.trim();
-  const points=Math.max(1,Number($("#chorePointsInput").value)||10);
-  if(!title){toast("Enter a chore name");return;}
-  state.chores.push({id:Date.now(),title,points,icon:"⭐",done:false});
-  state.activity.unshift(`Added chore "${title}"`);
-  $("#choreTitleInput").value="";
-  save();
-  $("#addChoreDialog").close();
-  toast("Chore added");
-};
-
-render();
-</script>
-</body>
-</html>
+  <header class="header">
+    <

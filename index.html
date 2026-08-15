@@ -1,300 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7657f6">
 <title>ChoreQuest</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f7f5ff;
-  color: #25233a;
-}
-
-.app {
-  max-width: 600px;
-  margin: auto;
-  padding-bottom: 80px;
-}
-
-/* HEADER */
-.header {
-  background: linear-gradient(135deg,#7559f5,#9b7cff);
-  color: white;
-  padding: 25px 20px 45px;
-  border-radius: 0 0 30px 30px;
-}
-
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 23px;
-  font-weight: bold;
-}
-
-.avatar {
-  background: white;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 25px;
-}
-
-.hello {
-  margin-top: 25px;
-}
-
-.hello small {
-  opacity: .9;
-  font-size: 16px;
-}
-
-.hello h1 {
-  margin: 5px 0;
-  font-size: 34px;
-}
-
-.hello p {
-  margin: 5px 0;
-}
-
-/* STATS */
-.stats {
-  display: flex;
-  gap: 10px;
-  padding: 0 15px;
-  margin-top: -25px;
-}
-
-.stat {
-  background: white;
-  flex: 1;
-  text-align: center;
-  padding: 16px 8px;
-  border-radius: 18px;
-  box-shadow: 0 5px 18px rgba(0,0,0,.08);
-}
-
-.stat-icon {
-  font-size: 25px;
-}
-
-.stat strong {
-  display: block;
-  font-size: 20px;
-  margin-top: 4px;
-}
-
-.stat span {
-  font-size: 12px;
-  color: #777;
-}
-
-/* CONTENT */
-.content {
-  padding: 20px 16px;
-}
-
-.reward {
-  background: linear-gradient(135deg,#fff2bd,#ffe17a);
-  border-radius: 22px;
-  padding: 18px;
-  margin-bottom: 25px;
-}
-
-.reward-top {
-  display: flex;
-  justify-content: space-between;
-}
-
-.reward h3 {
-  margin: 5px 0;
-  font-size: 23px;
-}
-
-.progress {
-  height: 12px;
-  background: rgba(255,255,255,.7);
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 12px;
-}
-
-.progress-bar {
-  width: 82.5%;
-  height: 100%;
-  background: #7559f5;
-  border-radius: 20px;
-}
-
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.section-title h2 {
-  margin: 5px 0 15px;
-}
-
-.add {
-  border: 0;
-  background: #eee9ff;
-  color: #654be4;
-  border-radius: 12px;
-  padding: 9px 13px;
-  font-weight: bold;
-}
-
-/* CHORES */
-.chore {
-  background: white;
-  border-radius: 18px;
-  padding: 14px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.05);
-}
-
-.chore-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 15px;
-  background: #eee9ff;
-  display: grid;
-  place-items: center;
-  font-size: 25px;
-}
-
-.chore-info {
-  flex: 1;
-}
-
-.chore-info strong {
-  display: block;
-  font-size: 17px;
-}
-
-.chore-info span {
-  color: #777;
-  font-size: 13px;
-}
-
-.coins {
-  color: #e5a400;
-  font-weight: bold;
-}
-
-.done {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border: 2px solid #7b61ff;
-  background: white;
-  font-size: 18px;
-}
-
-.done.completed {
-  background: #7b61ff;
-  color: white;
-}
-
-/* REWARDS */
-.reward-card {
-  background: white;
-  padding: 15px;
-  border-radius: 18px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.reward-emoji {
-  font-size: 30px;
-}
-
-.reward-info {
-  flex: 1;
-}
-
-.reward-info strong {
-  display: block;
-}
-
-.claim {
-  border: 0;
-  background: #7559f5;
-  color: white;
-  padding: 9px 12px;
-  border-radius: 12px;
-}
-
-/* CELEBRATION */
-#message {
-  display: none;
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #25233a;
-  color: white;
-  padding: 13px 20px;
-  border-radius: 20px;
-  z-index: 20;
-  box-shadow: 0 5px 20px rgba(0,0,0,.2);
-}
-
-/* NAVIGATION */
-.nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  display: flex;
-  justify-content: space-around;
-  padding: 12px 5px;
-  border-top: 1px solid #eee;
-}
-
-.nav-item {
-  text-align: center;
-  font-size: 12px;
-  color: #777;
-}
-
-.nav-item div {
-  font-size: 23px;
-}
-
-.nav-item.active {
-  color: #7559f5;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+<div id="toast">🎉 Great job!</div>
+<main class="app">
+  <header class="hero">
+    <button class="menu">☰</button>
+    <div class="greeting">
+      <div>Good morning,</div>
+      <h1>Amaya!</h1>
+      <div class="cheer"><span>⭐</span><div><b>You're doing amazing!</b><br>Let's make today awesome! 💖</div></div>
+    </div>
+    <div class="avatar"><span class="crown">👑</span>👧🏻</div>
+  </header>
 
-<div id="message">🎉 Great job!</div>
+  <section class="balance">
+    <div>
+      <div class="eyebrow">Your Balance</div>
+      <div class="coins"><span>🪙</span><b id="balance">165</b><small>coins</small></div>
+      <div class="streak">🔥 4 day streak</div>
+    </div>
+    <div class="pig">🐷<span class="coin-float">🪙</span></div>
+  </section>
 
-<div class="app">
+  <section class="reward">
+    <div class="reward-head"><div><span>Next Reward</span><h2>Movie Night</h2></div><b><span id="progressNum">165</span>/200</b></div>
+    <div class="movie">🍿 🎬</div>
+    <div class="bar"><div id="progressBar"></div></div>
+    <p>You're so close! Just <b id="remaining">35</b> more coins! 🤩</p>
+  </section>
 
-  <header class="header">
-    <
+  <section class="chores">
+    <div class="section-title"><h2>Today's chores ✨</h2><button id="addChore">+ Add chore</button></div>
+    <div id="choreList"></div>
+  </section>
+</main>
+
+<nav>
+  <button class="active">🏠<span>Home</span></button>
+  <button>📋<span>Chores</span></button>
+  <button>🎁<span>Rewards</span></button>
+  <button>🛒<span>Shop</span></button>
+  <button>👤<span>Profile</span></button>
+</nav>
+<script src="app.js"></script>
+</body>
+</html>
